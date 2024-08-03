@@ -1,0 +1,29 @@
+{
+  "name": "js-advanced-frontend",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "build": "webpack --mode=production --env prod",
+    "dev": "webpack serve --mode=development"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.0",
+    "image-minimizer-webpack-plugin": "^4.1.0",
+    "imagemin": "^9.0.0",
+    "mini-css-extract-plugin": "^2.9.0",
+    "sass": "^1.77.8",
+    "sass-loader": "^16.0.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  },
+  "dependencies": {
+    "redom": "^4.1.5"
+  }
+}
