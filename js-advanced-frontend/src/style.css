@@ -198,6 +198,10 @@ body {
   line-height: 24px;
 }
 
+.input-wrap input:focus {
+  border: 1px solid var(--blue);
+}
+
 .login-btn {
   padding: 14px 21px;
   align-self: self-end;
@@ -225,7 +229,8 @@ body {
 }
 
 .input-wrap input:focus {
-  border: 1px solid #9ca3af;
+  outline: none;
+  border: 1px solid var(--blue);
 }
 
 .login-error {
@@ -237,6 +242,10 @@ body {
   font-size: 20px;
   line-height: 26px;
   color: red;
+}
+
+.transaction-error {
+  bottom: -33%;
 }
 
 .login-error p {
@@ -297,7 +306,15 @@ body {
   border: 1px solid var(--blue);
 }
 
-.dropdown input::placeholder {
+.dropdown.accounts-dropdown input {
+  border: 1px solid #9ca3af;
+}
+
+.dropdown.accounts-dropdown input:focus {
+  border: 1px solid var(--blue);
+}
+
+.dropdown .dropdown input::placeholder {
   color: #374151;
   font-family: 'Ubuntu', sans-serif;
   font-size: 16px;
@@ -338,6 +355,8 @@ body {
   width: 100%;
   visibility: hidden;
   opacity: 0;
+
+  z-index: 100;
 
   border-radius: 7px;
   background-color: #fff;
@@ -658,6 +677,12 @@ body {
   width: 100%;
 }
 
+.page-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
 .new-tansaction-wrap {
   padding: 25px 50px;
   width: 606px;
@@ -679,6 +704,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
   width: 100%;
 }
 
@@ -698,6 +724,10 @@ body {
 
   cursor: pointer;
   transition: all .15s ease;
+}
+
+.transaction-btn:disabled {
+  opacity: 0.7;
 }
 
 .transaction-btn:hover {
@@ -733,6 +763,12 @@ body {
   cursor: pointer;
 }
 
+.balance-dinamic-wrap-huge {
+  padding: 26px 97px;
+  width: 100%;
+  cursor: auto;
+}
+
 .chart-wrap {
   display: flex;
   gap: 24px;
@@ -755,9 +791,19 @@ body {
   margin: 0;
 }
 
+.chart-values-ratio {
+  position: relative;
+}
+
+.chart-values-ratio p {
+  position: absolute;
+  bottom: 0;
+}
+
 .chart-data {
   display: flex;
   flex-wrap: nowrap;
+  justify-content: center;
   gap: 28px;
 
   padding-right: 35px;
@@ -767,6 +813,11 @@ body {
   min-height: 165px;
 
   border: 1px solid #000;
+}
+
+.balance-dinamic-wrap-huge .chart-data {
+  max-width: 1000px;
+  width: 100%;
 }
 
 .chart-el {
@@ -782,6 +833,19 @@ body {
 
 .month-value div {
   background-color: var(--blue);
+}
+
+.month-block {
+  position: relative;
+  height: 100%;
+  background-color: transparent !important;
+}
+
+.month-block div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .chart-month {
@@ -849,4 +913,85 @@ body {
 
 .history-table tr {
   border-bottom: 2px solid #0052FF1A;
+}
+
+.table-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.table-nav-item {
+  position: relative;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.table-nav-item:disabled {
+  opacity: 0.7;
+}
+
+.table-nav-item:hover {
+  opacity: 0.8;
+}
+
+.table-nav-item:focus {
+  outline: none;
+  border: none;
+  opacity: 0.8;
+}
+
+.table-nav-item:active {
+  opacity: 1;
+}
+
+.table-nav-item::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 15px;
+  z-index: 9999;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #fff;
+  border-top: transparent;
+  border-right: transparent;
+  pointer-events: none;
+  transition: all 0.3s linear;
+}
+
+.table-nav-item.previous::after {
+  transform: rotate(45deg);
+}
+
+.table-nav-item.next::after {
+  transform: rotate(-135deg);
+  left: 13px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-error {
+  position: absolute;
+  top: -15px;
+  right: 5px;
+  color: red;
+  font-size: 12px;
+}
+
+.account-number-dropdown {
+  position: relative;
+}
+
+.account-number-dropdown input {
+  border: 1px solid #9ca3af;
 }

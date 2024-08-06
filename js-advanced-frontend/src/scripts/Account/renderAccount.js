@@ -4,6 +4,7 @@ import { sortAccounts } from '../utils';
 import {app, headerContainer, AUTH_TOKEN} from '../../main';
 import { renderNavigation } from '../Navigation/renderNavigation';
 import { renderAccountData } from '../AccountData/renderAccountData';
+import { createAccount, getAccountData, getAccounts } from '../api';
 
 export async function renderAccount() {
   app.innerHTML = '';
@@ -31,13 +32,7 @@ export async function renderAccount() {
   async function renderAccounts(data) {
     let accountData;
     if (!data) {
-      const response = await fetch(`${SERVER_URL}/accounts`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Basic ${AUTH_TOKEN}`
-        }
-      });
-      accountData = await response.json();
+      accountData = await getAccounts();
     } else {
       accountData = data;
     }
@@ -105,15 +100,8 @@ export async function renderAccount() {
       mount(pageAccounts, accountWrap);
 
       btn.addEventListener('click', async function() {
-        const accountData = await fetch(`${SERVER_URL}/account/${account.account}`, {
-          method: 'GET',
-            headers: {
-            Authorization: `Basic ${AUTH_TOKEN}`
-          }
-        }).then((res) => res.json());
-        console.log(accountData);
-        app.innerHTML = '';
-        await renderAccountData(accountData.payload)
+        const accountData = await getAccountData(account.account);
+        await renderAccountData(accountData.payload);
       });
     });
 
@@ -134,18 +122,18 @@ export async function renderAccount() {
       let filteredList;
       switch(event.target.textContent) {
         case 'По номеру':
-          filteredList = await sortAccounts(accountsList, 'account');
+          filteredList = sortAccounts(accountsList, 'account');
           console.log(filteredList)
           pageAccounts.innerHTML = '';
           await renderAccounts(filteredList);
           break;
         case 'По балансу':
-          filteredList = await sortAccounts(accountsList, 'balance');
+          filteredList = sortAccounts(accountsList, 'balance');
           pageAccounts.innerHTML = '';
           await renderAccounts(filteredList);
           break;
         case 'По последней транзакции':
-          filteredList = await sortAccounts(accountsList, 'transactions');
+          filteredList = sortAccounts(accountsList, 'transactions');
           pageAccounts.innerHTML = '';
           await renderAccounts(filteredList);
           break;
@@ -160,14 +148,7 @@ export async function renderAccount() {
 
   newAccountBtn.addEventListener('click', async function(event) {
     event.preventDefault();
-    const newAccount = await fetch(`${SERVER_URL}/create-account`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${AUTH_TOKEN}`
-      },
-      body: JSON.stringify({})
-    }).then((res) => res.json()).then((data) => console.log(data));
+    const newAccount = await createAccount();
 
     pageAccounts.innerHTML = '';
     await renderAccounts();
