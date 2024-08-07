@@ -47,3 +47,34 @@ export async function transferMoney(from, to, amount) {
 
   return response;
 }
+
+export async function getCurrencies() {
+  const response = await fetch(`${SERVER_URL}/currencies`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Basic ${AUTH_TOKEN}`
+    }
+  }).then((res) => res.json());
+
+  return response;
+}
+
+export async function getAllCurencies() {
+  const response = await fetch(`${SERVER_URL}/all-currencies`)
+    .then((res) => res.json());
+
+  return response;
+}
+
+export async function buyCurrency(from, to, amount) {
+  const response = await fetch(`${SERVER_URL}/currency-buy`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${AUTH_TOKEN}`
+    },
+    body: JSON.stringify({from, to, amount})
+  }).then((res) => res.json());
+
+  return response;
+}

@@ -97,9 +97,11 @@ body {
 }
 
 .container {
+  margin: 0 auto;
   padding-right: 50px;
   padding-left: 50px;
   width: 100%;
+  max-width: 1440px;
 }
 
 .header {
@@ -363,6 +365,11 @@ body {
   box-shadow: 0px 5px 20px 0px #00000040;
 
   transition: all .3s ease;
+}
+
+.dropdown-exchange ul {
+  max-height: 120px;
+  overflow-y: scroll;
 }
 
 .dropdown.opened ul {
@@ -994,4 +1001,225 @@ body {
 
 .account-number-dropdown input {
   border: 1px solid #9ca3af;
+}
+
+.currency-page-title {
+  margin-bottom: 56px;
+}
+
+.currency-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.currency-left {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  width: calc(50% - 50px);
+}
+
+.currency-box-1 {
+  padding: 50px;
+  background-color: #fff;
+  box-shadow: 0px 5px 20px 0px #00000040;
+  border-radius: 50px;
+  width: 100%;
+  height: fit-content;
+}
+
+.currency-course {
+  padding: 50px;
+  background-color: #e5e5e5;
+  border-radius: 50px;
+  width: calc(50% - 50px);
+}
+
+.currency-course .currency-list {
+  padding-right: 5px;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.currency-course .currency-list::-webkit-scrollbar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -25px;
+  width: 5px;
+}
+
+.currency-course .currency-list::-webkit-scrollbar-track {
+  border-radius: 7px;
+  background-color: #e5e5e5;
+}
+
+.currency-course .currency-list::-webkit-scrollbar-thumb {
+  background-color: #9ca3af;
+  border-radius: 7px;
+}
+
+.currency-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.currency-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.currency-course-value {
+  position: relative;
+  padding-right: 35px;
+}
+
+.currency-item.up .currency-course-value::after {
+  position: absolute;
+  bottom: 4px;
+  right: 0;
+  content: '';
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid #76CA66;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.currency-item.down .currency-course-value::after {
+  position: absolute;
+  bottom: 4px;
+  right: 0;
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 10px solid #FD4E5D;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.currency-item p {
+  margin: 0;
+  padding: 0;
+
+  background-color: #fff;
+  z-index: 10;
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 23px;
+}
+
+.currency-course .currency-item p {
+  background-color: #e5e5e5;
+}
+
+.currency-item p:first-of-type {
+  padding-right: 10px;
+}
+
+.currency-item p:last-of-type {
+  padding-left: 10px;
+  font-weight: 400;
+  flex-grow: 0;
+}
+
+.currency-course .currency-item p:last-of-type {
+  padding-right: 35px;
+}
+
+.currency-item::before {
+  position: absolute;
+  content: '';
+  left: 0;
+  right: 0;
+  bottom: 5px;
+  height: 100%;
+  z-index: 1;
+  border-bottom: 1px dotted black;
+}
+
+.currency-item.up::before {
+  border-bottom-color: #76CA66;
+}
+
+.currency-item.down::before {
+  border-bottom-color: #FD4E5D;
+}
+
+.exchange-form {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.exchange-form .input-wrap {
+  margin: 0;
+}
+
+.exchange-form-top {
+  display: flex;
+  justify-content: space-between;
+  max-width: 358px;
+  margin-bottom: 25px;
+  gap: 20px;
+}
+
+.dropdown-exchange {
+  width: 134px;
+}
+
+.exchange-form .input-wrap label {
+  margin-right: 12px;
+}
+
+.dropdown-exchange input {
+  border-color: #9ca3af;
+}
+
+.exchange-form-inputs {
+  max-width: 358px;
+}
+
+.exchange-form-button {
+  padding: 0 13px;
+  flex-grow: 1;
+  border: none;
+  border-radius: 7px;
+  background-color: var(--blue);
+
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #fff;
+
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.exchange-form-button:disabled {
+  opacity: 0.7;
+}
+
+.exchange-form-button:hover {
+  opacity: 0.8;
+}
+
+.exchange-form-button:focus {
+  border: none;
+  outline: none;
+}
+
+.exchange-form .login-error {
+  bottom: -70%;
 }

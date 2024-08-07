@@ -11,6 +11,10 @@ export async function renderAccount() {
 
   if (!headerContainer.querySelector('.nav-list')) {
     mount(headerContainer, renderNavigation());
+    document.getElementById('accounts').classList.add('active');
+  } else {
+    headerContainer.querySelector('.nav-item.active').classList.remove('active');
+    document.getElementById('accounts').classList.add('active');
   }
 
   const page = el('.page-container.container');

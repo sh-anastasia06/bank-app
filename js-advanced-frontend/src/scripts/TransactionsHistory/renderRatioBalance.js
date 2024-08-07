@@ -11,7 +11,18 @@ export function renderRatioBalance(payload) {
     return false;
   });
 
-  const monthData = [];
+  const monthData = [
+    {
+      month: 1,
+      received: 10000,
+      sent: 12000
+    },
+    {
+      month: 2,
+      received: 80000,
+      sent: 4000
+    },
+  ];
   latestTransactions.forEach((t) => {
     console.log(t)
     const month = new Date(t.date).getMonth();

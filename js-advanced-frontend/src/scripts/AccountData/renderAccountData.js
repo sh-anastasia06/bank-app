@@ -8,8 +8,8 @@ import { renderBalanceHistory } from '../BalanceHistory/renderBalanceHistory';
 
 export async function renderAccountData(payload) {
   app.innerHTML = '';
-  if (document.querySelector('.nav-item.active')) {
-    document.querySelector('.nav-item.active').classList.remove('active');
+  if (headerContainer.querySelector('.nav-item.active')) {
+    headerContainer.querySelector('.nav-item.active').classList.remove('active');
   }
   
   

@@ -87,7 +87,7 @@ export function renderNewTransactionForm(accountNumber) {
     const dotPos = event.target.value.indexOf('.');
     if (event.target.value.length === dotPos + 1 && dotPos !== -1) {
       event.target.value += '00';
-    } else if ( event.target.value.length === dotPos + 2 ) {
+    } else if ( event.target.value.length === dotPos + 2 && dotPos !== -1) {
       event.target.value += '0';
     }
     validateForm();
