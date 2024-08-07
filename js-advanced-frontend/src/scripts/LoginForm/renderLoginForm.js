@@ -45,6 +45,12 @@ export async function renderLogin() {
     });
 
     !formNotValid ? document.querySelector('.login-btn').disabled = false : document.querySelector('.login-btn').disabled = true;
+
+    if(!formNotValid) {
+      if (document.querySelector('.login-error')) {
+        document.querySelector('.login-error').remove();
+      }
+    }
   }
 
   inputArr.forEach((inp) => {
@@ -82,7 +88,13 @@ export async function renderLogin() {
       AUTH_TOKEN = payload.token;
     }
     if (error) {
-      mount(event.target, renderErrorMessage(error));
+      let errorMessage;
+      if (error == 'Invalid password') {
+        errorMessage = 'Неверный пароль' ;
+      } else {
+        errorMessage = 'Пользователя с таким логином и паролем нет'
+      }
+      mount(event.target, renderErrorMessage(errorMessage));
     } else {
       renderAccount();
     }

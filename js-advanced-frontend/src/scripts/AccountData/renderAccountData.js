@@ -5,13 +5,19 @@ import { renderNewTransactionForm } from './renderNewTransactionForm';
 import { renderTransactionsHistory } from '../TransactionsHistory/renderTransactionsHistory';
 import { renderBalanceData } from '../TransactionsHistory/renderBalance';
 import { renderBalanceHistory } from '../BalanceHistory/renderBalanceHistory';
+import { spinner } from '../Spinner/spinner';
+import { getAccountData } from '../api';
 
-export async function renderAccountData(payload) {
+export async function renderAccountData(accountId) {
   app.innerHTML = '';
   if (headerContainer.querySelector('.nav-item.active')) {
     headerContainer.querySelector('.nav-item.active').classList.remove('active');
   }
-  
+
+  const loading = spinner();
+  mount(app, loading);
+  const {payload, error} = await getAccountData(accountId);
+  loading.remove();
   
   const page = el('.account-page-container.container');
   const pageWrap = el('.page', page);

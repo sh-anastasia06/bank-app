@@ -112,7 +112,6 @@ export async function renderExchangeForm(fromArr) {
     }
 
     const response = await buyCurrency(fromSelected.value, toSelected.value, amountInput.value);
-    alert(JSON.stringify(response))
     if (response.error == '') {
       await renderCurrency();
     } else {
@@ -123,5 +122,3 @@ export async function renderExchangeForm(fromArr) {
 
   return form;
 }
-
-// обработка ошибок

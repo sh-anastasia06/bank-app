@@ -5,6 +5,8 @@ import {app, headerContainer, AUTH_TOKEN} from '../../main';
 import { renderNavigation } from '../Navigation/renderNavigation';
 import { renderAccountData } from '../AccountData/renderAccountData';
 import { createAccount, getAccountData, getAccounts } from '../api';
+import { load } from 'ymaps';
+import { spinner } from '../Spinner/spinner';
 
 export async function renderAccount() {
   app.innerHTML = '';
@@ -13,7 +15,9 @@ export async function renderAccount() {
     mount(headerContainer, renderNavigation());
     document.getElementById('accounts').classList.add('active');
   } else {
-    headerContainer.querySelector('.nav-item.active').classList.remove('active');
+    if (headerContainer.querySelector('.nav-item.active')) {
+      headerContainer.querySelector('.nav-item.active').classList.remove('active');
+    }
     document.getElementById('accounts').classList.add('active');
   }
 
@@ -32,11 +36,14 @@ export async function renderAccount() {
   const newAccountBtn = el('button', { className: 'add-account-btn', textContent: 'Создать новый счёт' });
 
   const pageAccounts = el('.accounts');
+  const loading = spinner();
 
   async function renderAccounts(data) {
     let accountData;
     if (!data) {
+      mount(app, loading);
       accountData = await getAccounts();
+      loading.remove();
     } else {
       accountData = data;
     }
@@ -104,8 +111,7 @@ export async function renderAccount() {
       mount(pageAccounts, accountWrap);
 
       btn.addEventListener('click', async function() {
-        const accountData = await getAccountData(account.account);
-        await renderAccountData(accountData.payload);
+        await renderAccountData(account.account);
       });
     });
 
@@ -127,7 +133,6 @@ export async function renderAccount() {
       switch(event.target.textContent) {
         case 'По номеру':
           filteredList = sortAccounts(accountsList, 'account');
-          console.log(filteredList)
           pageAccounts.innerHTML = '';
           await renderAccounts(filteredList);
           break;

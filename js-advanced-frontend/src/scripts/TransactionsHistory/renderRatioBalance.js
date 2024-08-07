@@ -11,20 +11,8 @@ export function renderRatioBalance(payload) {
     return false;
   });
 
-  const monthData = [
-    {
-      month: 1,
-      received: 10000,
-      sent: 12000
-    },
-    {
-      month: 2,
-      received: 80000,
-      sent: 4000
-    },
-  ];
+  const monthData = [];
   latestTransactions.forEach((t) => {
-    console.log(t)
     const month = new Date(t.date).getMonth();
 
     const flag = monthData.find((m) => m.month === month);
@@ -91,8 +79,6 @@ export function renderRatioBalance(payload) {
     const monthBlock = el('.month-block', [{style: {height: '100%'}}, monthRecieved, monthSend]);
     const monthValue = el('.month-value');
     mount(monthValue, monthBlock);
-
-    console.log(m.sent, maxSend)
 
     monthBlock.animate(
       [{height: 0}, {height: `100%`}],

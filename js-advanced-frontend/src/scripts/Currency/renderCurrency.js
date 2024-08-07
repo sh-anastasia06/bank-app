@@ -4,13 +4,20 @@ import { getAllCurencies, getCurrencies } from "../api";
 import { renderCurrencyList } from "./renderCurrencyList";
 import { renderExchangeForm } from "./renderExchangeForm";
 import { renderCurrencyChange } from "./renderCurrencyChange";
+import { spinner } from "../Spinner/spinner";
 
 export async function renderCurrency() {
   app.innerHTML = '';
 
+  const loading = spinner();
+  mount(app, loading);
   const clientCurrencyData = await getCurrencies();
-
-  headerContainer.querySelector('.nav-item.active').classList.remove('active');
+  loading.remove();
+  
+  if (headerContainer.querySelector('.nav-item.active')) {
+    headerContainer.querySelector('.nav-item.active').classList.remove('active');
+  }
+  
   document.getElementById('currency').classList.add('active');
 
   const page = el('.currency-page-container.container');
@@ -21,7 +28,6 @@ export async function renderCurrency() {
   mount(page, pageTitle);
 
   const clientCurrency = el('.currency-client.currency-box-1');
-  console.log(clientCurrencyData.payload)
   if (clientCurrencyData.error == '') {
     mount(clientCurrency, el('h3', { className: 'account-page-mini-title', textContent: 'Ваши валюты' }));
     mount(clientCurrency, renderCurrencyList(clientCurrencyData.payload));
@@ -53,7 +59,6 @@ export async function renderCurrency() {
   const currencyExchange = el('.currency-exchange.currency-box-1');
   if (clientCurrencyData.error == '') {
     mount(currencyExchange, el('h3', { className: 'account-page-mini-title', textContent: 'Обмен валюты' }));
-    console.log(Object.keys(clientCurrencyData.payload))
     mount(currencyExchange, await renderExchangeForm(Object.keys(clientCurrencyData.payload)));
   } else {
     mount(currencyExchange, el('h3', { className: 'account-page-mini-title', textContent: 'У вас отсутствуют валюты' }));

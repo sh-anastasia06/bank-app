@@ -19,7 +19,7 @@ export function renderBalanceHistory(payload) {
 
   backBtn.addEventListener('click', async function() {
     headerContainer.querySelectorAll('.nav-item')[1].classList.add('active');
-    await renderAccountData(payload);
+    await renderAccountData(payload.account);
   })
 
   mount(

@@ -2,11 +2,16 @@ import { el, mount } from 'redom';
 import { app, headerContainer } from '../../main';
 import { getBanks } from '../api';
 import ymaps from 'ymaps';
+import { spinner } from '../Spinner/spinner';
 
 export async function renderMap() {
   app.innerHTML = '';
-
-  headerContainer.querySelector('.nav-item.active').classList.remove('active');
+  const loading = spinner();
+  mount(app, loading);
+  if (headerContainer.querySelector('.nav-item.active')) {
+    headerContainer.querySelector('.nav-item.active').classList.remove('active');
+  }
+  
   document.getElementById('atm').classList.add('active');
 
   const page = el('.map-page-container.container');
@@ -16,7 +21,7 @@ export async function renderMap() {
   mount(page, pageTitle);
 
   const marks = await getBanks().then((res) => res.payload);
-  console.log(marks)
+  loading.remove();
 
   const mapWrap = el('.map-wrap', { id: 'map' });
   function init() {

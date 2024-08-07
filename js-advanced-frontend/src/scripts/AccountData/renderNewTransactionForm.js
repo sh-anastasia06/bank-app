@@ -33,6 +33,9 @@ export function renderNewTransactionForm(accountNumber) {
   function validateForm() {
     if (inputArr[0].value.length > 0 && inputArr[1].value.length > 0) {
       newTransactionForm.querySelector('button').disabled = false;
+      if (document.querySelector('.login-error')) {
+        document.querySelector('.login-error').remove();
+      }
     } else {
       newTransactionForm.querySelector('button').disabled = true;
     }
@@ -109,9 +112,15 @@ export function renderNewTransactionForm(accountNumber) {
       });
 
       const accountData = await getAccountData(accountNumber);
-      await renderAccountData(accountData.payload);
+      await renderAccountData(accountNumber);
     } else {
-      mount(event.target, renderErrorMessage(response.error))
+      let errorMessage;
+      if (response.error == 'Invalid account to') {
+        errorMessage = 'Такого счёта не существует'
+      } else {
+        errorMessage = 'Недостаточно средств для перевода'
+      }
+      mount(event.target, renderErrorMessage(errorMessage));
     }
   });
   
