@@ -9,7 +9,6 @@ export async function renderCurrency() {
   app.innerHTML = '';
 
   const clientCurrencyData = await getCurrencies();
-  const currencyCourseData = await getAllCurencies();
 
   headerContainer.querySelector('.nav-item.active').classList.remove('active');
   document.getElementById('currency').classList.add('active');

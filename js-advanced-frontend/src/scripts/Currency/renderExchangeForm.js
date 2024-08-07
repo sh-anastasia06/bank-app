@@ -7,7 +7,6 @@ export async function renderExchangeForm(fromArr) {
   const toArr = await getAllCurencies().then((res) => res.payload);
 
   const form = el('form.exchange-form');
-  let errorMessage;
   
   const fromSelected = el('input', { id: 'from-selected', className: 'selected', type: 'text', readOnly: true });
   const fromUl = el('ul');

@@ -1,5 +1,5 @@
 import { SERVER_URL } from "./constantValues";
-import { AUTH_TOKEN } from "../main";
+import {AUTH_TOKEN} from './LoginForm/renderLoginForm'
 
 export async function createAccount() {
   const result = await fetch(`${SERVER_URL}/create-account`, {
@@ -75,6 +75,13 @@ export async function buyCurrency(from, to, amount) {
     },
     body: JSON.stringify({from, to, amount})
   }).then((res) => res.json());
+
+  return response;
+}
+
+export async function getBanks() {
+  const response =  await fetch(`${SERVER_URL}/banks`)
+    .then((res) => res.json());
 
   return response;
 }

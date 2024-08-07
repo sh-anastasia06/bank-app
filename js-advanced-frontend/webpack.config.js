@@ -28,6 +28,13 @@ module.exports = {
   plugins: [new HtmlWebpackPlugin({ title: 'Coin.' }), new MiniCssExtractPlugin({
     filename: 'main.[contenthash].css',
   })],
+  externalsType: 'script',
+  externals: {
+    ymaps: [
+      "https://api-maps.yandex.ru/2.1/?apikey=9eaafcf4-a275-4ab6-bcd0-da7d650fbbc2&lang=ru_RU",
+      'ymaps'
+    ],
+  },
   devServer: {
     hot: true,
     historyApiFallback: true,

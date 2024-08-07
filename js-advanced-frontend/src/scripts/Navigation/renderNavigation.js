@@ -2,6 +2,8 @@ import {el, mount} from 'redom';
 import { app, AUTH_TOKEN } from '../../main';
 import { renderLogin } from '../LoginForm/renderLoginForm';
 import { renderCurrency } from '../Currency/renderCurrency';
+import { renderMap } from '../Map/renderMap';
+import { renderAccount } from '../Account/renderAccount';
 export function renderNavigation() {
   const nav = el('div', { className: 'nav-list' });
 
@@ -14,6 +16,18 @@ export function renderNavigation() {
 
   currency.addEventListener('click', async function() {
     await renderCurrency();
+  });
+
+  atm.addEventListener('click', async function() {
+    await renderMap();    
+  });
+
+  accounts.addEventListener('click', async function() {
+    await renderAccount();
+  });
+
+  exit.addEventListener('click', async function() {
+    await renderLogin();
   })
 
   return nav;
